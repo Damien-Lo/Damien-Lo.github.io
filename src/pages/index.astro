@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import Contours from "../components/Contours.astro";
+import Skyline from "../components/Skyline.astro";
 import { profile } from "../data/profile";
 import { publications, ME } from "../data/publications";
 import { news } from "../data/news";
@@ -17,7 +17,7 @@ const links = [
 
 <Base>
   <section class="hero">
-    <Contours />
+    <Skyline />
     <div class="wrap hero-inner">
       <img
         class="headshot"
@@ -123,7 +123,7 @@ const links = [
   .news li:last-child { border-bottom: 0; }
   .date { color: var(--faint); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 2px; }
   @media (max-width: 600px) {
-    .hero-inner { flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 2rem; }
+    .hero-inner { flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 2rem; padding-bottom: calc(50vw + 1rem); }
     .headshot { width: 120px; height: 142px; }
     .news li { grid-template-columns: 1fr; gap: 0; }
   }
