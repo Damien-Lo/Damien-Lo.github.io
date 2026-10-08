@@ -6,9 +6,9 @@ import Base from "../layouts/Base.astro";
   <div class="wrap">
     <h1 class="page-title">Research</h1>
     <p class="lede">
-      I explore the dynamics and memory of large models through membership inference attacks, which test whether a
+      I currently explore the dynamics and memory of large models through membership inference attacks, which test whether a
       specific example was part of a model's training data. A successful attack reveals what a model has memorized, so
-      these attacks double as probes of how models store information. My work spans an attack on vision large language
+      these attacks double as probes of how models store information. My recent work spans an attack on vision large language
       models, a geometric framework for the signal behind it, and scaling laws for predicting privacy risk at scale.
     </p>
 
@@ -65,16 +65,12 @@ import Base from "../layouts/Base.astro";
       <p>
         COMPASS treats a model's response to noise as a signal. This project asks what that signal is a measurement
         of. My thesis began to describe memorized samples as sitting in unusually stable regions of a model's response
-        landscape, regions that resist small perturbations. I am now working to make that picture precise, using the
-        dynamics of how outputs change under perturbation, together with tools from information geometry, to map the
-        landscape around training and unseen data.
+        landscape, regions that resist small perturbations. I am now working to make that picture precise, using the dynamics of how outputs change under perturbation to map the landscape around training and unseen data.
       </p>
       <p>
         The goal is a mechanistic account of membership inference: why the signal appears at low noise, why its
-        direction flips between models, and whether memorization leaves measurable geometric signatures in a model's
-        representations. An explanation of that kind would turn privacy attacks from empirical tools into instruments
-        for studying how large models store what they learn. My background in physics, including two years of
-        experimental condensed-matter research, shapes how I approach these questions.
+        direction flips between models, and whether memorization leaves measurable geometric signatures in a model's representations. I aim to incorporate tools from information geometry and statistical physics to describe these state spaces, developing methods that may reveal previously underexplored relationships between memorization, utility and security. An explanation of that kind would turn privacy attacks from empirical tools into instruments
+        for studying how large models store what they learn.
       </p>
     </section>
 
