@@ -29,7 +29,7 @@ const links = [
       />
       <div>
         <h1>{profile.name}</h1>
-        <p class="role">{profile.role}<br /><span class="muted">{profile.affiliation}</span></p>
+        <p class="role">{profile.role}, advised by <a href={profile.links.advisor}>{profile.advisor}</a><br /><span class="muted">{profile.affiliation}</span></p>
         <ul class="links">
           {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
         </ul>
@@ -106,7 +106,7 @@ const links = [
   .links { display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 0; margin: 0; list-style: none; font-size: 0.95rem; font-weight: 500; }
   .question { font-family: var(--serif); font-size: 1.45rem; line-height: 1.4; font-style: italic; margin: 0 0 1.25rem; }
   .intro { font-size: 1.06rem; }
-  .thanks { font-size: 0.95rem; color: var(--muted); }
+  .thanks { font-size: 1.06rem; }
   .chips { margin-top: 1.25rem; }
   .featured h3 { margin: 0.35rem 0 0.5rem; font-size: 1.2rem; }
   .featured .eyebrow { margin: 0; color: var(--badge-review-fg); }
