@@ -1,6 +1,5 @@
 ---
 import Base from "../layouts/Base.astro";
-import ConceptFigure from "../components/ConceptFigure.astro";
 ---
 
 <Base title="Research" description="Damien Lo's research on privacy and memorization in vision large language models.">
@@ -29,7 +28,26 @@ import ConceptFigure from "../components/ConceptFigure.astro";
         from unlabeled data. It reaches AUC up to 0.88 on LLaVA v1.5-7B and 0.81 on MiniGPT-4. On the HuluMed-32B medical
         model it reaches 0.64 on endoscopy images, where the strongest baseline sits at chance.
       </p>
-      <ConceptFigure />
+      <figure>
+        <img src="/compass-fig1.png" width="1340" height="545" loading="lazy"
+          alt="Two plots from the COMPASS paper. Left: mean KL divergence against normalized Gaussian noise for members and non-members of LLaVA v1.5-7B, across three noise regimes. Right: the member minus non-member divergence gap, with and without Rényi normalization, dipping most sharply in the middle regime." />
+        <figcaption class="small muted">
+          Perturbation sensitivity of LLaVA v1.5–7B on Flickr pre-training data across normalized Gaussian noise.
+          <strong>Left:</strong> mean KL divergence for members and non-members (bands show one standard deviation).
+          <strong>Right:</strong> the member–non-member gap, with and without Rényi normalization; the gap is most
+          negative in the low-noise Regime II. From the COMPASS paper (Figure 1).
+        </figcaption>
+      </figure>
+      <figure class="wide">
+        <img src="/compass-fig2.png" width="1650" height="652" loading="lazy"
+          alt="Diagram of the COMPASS attack: a noise-level calibration phase using an unlabeled target set and a known non-member reference set, a shared perturbation scoring operator (perturb, query the VLLM, token-wise divergence, max-k mean), and a per-sample membership decision." />
+        <figcaption class="small muted">
+          The COMPASS attack. A tuning phase compares how the target set and a known non-member reference set respond
+          across noise levels to pick the perturbation magnitude and score direction; a scoring phase then perturbs each
+          image, aggregates the largest token-wise divergences, and orients the result into a membership score. From the
+          COMPASS paper (Figure 2).
+        </figcaption>
+      </figure>
       <p class="small muted aside">
         COMPASS grew out of the method developed in my <a href="/publications">honors thesis</a>, which also evaluated MRI
         and microscopy data. The paper is under review at ICLR 2027.
@@ -70,6 +88,11 @@ import ConceptFigure from "../components/ConceptFigure.astro";
   section .eyebrow { margin: 0; }
   section h2 { margin-top: 0.2rem; }
   .aside { margin-top: 1rem; }
+  figure { margin: 1.5rem 0 0; }
+  figure img { width: 100%; height: auto; display: block; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
+  figcaption { margin-top: 0.6rem; }
+  .wide { width: min(1040px, calc(100vw - 32px)); position: relative; left: 50%; transform: translateX(-50%); }
+  .wide figcaption { max-width: 720px; margin-left: auto; margin-right: auto; }
   .emerging { border-left: 3px solid var(--accent-soft); padding-left: 18px; }
   .emerging h2 { font-size: 1.35rem; }
 </style>

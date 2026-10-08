@@ -59,13 +59,8 @@ const links = [
         }
         <span class="small muted"> (* equal contribution)</span>
       </p>
-      <p>
-        Membership inference asks whether a given image was in a model's training data. We sweep Gaussian image noise at
-        fine resolution and find that the strongest signal often sits in a previously unstudied low-noise regime, where
-        training images change <em>less</em> than unseen ones. COMPASS calibrates both the noise level and the direction
-        of the signal without any labeled training examples. It reaches AUC up to 0.88 across LLaVA and MiniGPT-4, and
-        stays informative on medical images where existing attacks fall to chance.
-      </p>
+      <p class="abstract-label eyebrow">Abstract</p>
+      <p class="abstract">{compass.abstract}</p>
       <p class="more small"><a href="/research">More on this line of research →</a></p>
     </article>
 
@@ -98,6 +93,8 @@ const links = [
   .featured .authors { font-size: 0.95rem; margin-bottom: 0.8rem; }
   .featured .authors sup { font-size: 0.7em; }
   .featured p:last-child { margin-bottom: 0; }
+  .featured .abstract-label { color: var(--faint); margin: 0 0 0.2rem; }
+  .abstract { font-size: 0.95rem; line-height: 1.6; }
   .news { list-style: none; padding: 0; margin: 0; }
   .news li { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 0.45rem 0; border-bottom: 1px solid var(--border); }
   .news li:last-child { border-bottom: 0; }

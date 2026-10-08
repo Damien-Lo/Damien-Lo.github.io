@@ -44,6 +44,14 @@ const hasEqual = (pub.equal?.length ?? 0) > 1;
     {pub.links.code && <a class="btn" href={pub.links.code}>Code</a>}
     {pub.links.library && <a class="btn" href={pub.links.library}>Emory library</a>}
     {
+      pub.abstract && (
+        <details class="bib">
+          <summary class="btn">Abstract</summary>
+          <p class="abstract">{pub.abstract}</p>
+        </details>
+      )
+    }
+    {
       pub.bibtex && (
         <details class="bib">
           <summary class="btn">BibTeX</summary>
@@ -66,6 +74,7 @@ const hasEqual = (pub.equal?.length ?? 0) > 1;
   .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
   .actions:empty { display: none; }
   .bib[open] { width: 100%; }
+  .abstract { margin: 10px 0 0; font-size: 0.93rem; line-height: 1.6; }
   .bib summary { list-style: none; display: inline-flex; }
   .bib summary::-webkit-details-marker { display: none; }
   .bib pre { margin: 10px 0 0; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; font-family: var(--mono); font-size: 0.78rem; line-height: 1.5; overflow-x: auto; white-space: pre; }
