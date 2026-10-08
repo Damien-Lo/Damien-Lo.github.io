@@ -38,7 +38,9 @@ const links = [
   </section>
 
   <div class="wrap">
-    {profile.intro.map((p) => <p class="intro">{p}</p>)}
+    <p class="question">{profile.question}</p>
+    {profile.intro.map((p) => <p class="intro" set:html={p} />)}
+    <p class="thanks" set:html={profile.thanks} />
     <ul class="chips" aria-label="Research interests">
       {profile.interests.map((i) => <li>{i}</li>)}
     </ul>
@@ -102,7 +104,9 @@ const links = [
   .headshot { width: 160px; height: 190px; object-fit: cover; object-position: 50% 22%; border-radius: 12px; border: 1px solid var(--border); flex-shrink: 0; background: var(--surface); }
   .role { margin: 0.35rem 0 0.9rem; font-size: 1.02rem; line-height: 1.5; }
   .links { display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 0; margin: 0; list-style: none; font-size: 0.95rem; font-weight: 500; }
+  .question { font-family: var(--serif); font-size: 1.45rem; line-height: 1.4; font-style: italic; margin: 0 0 1.25rem; }
   .intro { font-size: 1.06rem; }
+  .thanks { font-size: 0.95rem; color: var(--muted); }
   .chips { margin-top: 1.25rem; }
   .featured h3 { margin: 0.35rem 0 0.5rem; font-size: 1.2rem; }
   .featured .eyebrow { margin: 0; color: var(--badge-review-fg); }
