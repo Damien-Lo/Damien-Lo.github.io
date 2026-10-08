@@ -44,21 +44,34 @@ const nav = [
     <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#121418" media="(prefers-color-scheme: dark)" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <script is:inline>
+      // Apply a saved light/dark choice before the page paints.
+      try {
+        const t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-nav">
       <div class="wrap bar">
         <a class="brand" href="/">{profile.name}</a>
+        <div class="right">
         <nav aria-label="Main" class="desktop">
           {nav.map((n) => <a href={n.href} aria-current={path === n.href ? "page" : undefined}>{n.label}</a>)}
         </nav>
+        <button class="theme-toggle" type="button" aria-label="Switch between light and dark mode" title="Switch between light and dark mode">
+          <svg class="sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></g></svg>
+          <svg class="moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </button>
         <details class="mobile">
           <summary aria-label="Menu">Menu</summary>
           <nav aria-label="Main mobile">
             {nav.map((n) => <a href={n.href} aria-current={path === n.href ? "page" : undefined}>{n.label}</a>)}
           </nav>
         </details>
+        </div>
       </div>
     </header>
 
@@ -80,6 +93,15 @@ const nav = [
         <p class="small muted">© {new Date().getFullYear()} {profile.name}. Last updated {profile.siteUpdated}.</p>
       </div>
     </footer>
+    <script is:inline>
+      document.querySelector(".theme-toggle")?.addEventListener("click", () => {
+        const root = document.documentElement;
+        const current = root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        const next = current === "dark" ? "light" : "dark";
+        root.dataset.theme = next;
+        try { localStorage.setItem("theme", next); } catch (e) {}
+      });
+    </script>
   </body>
 </html>
 
@@ -92,7 +114,18 @@ const nav = [
   nav a { color: var(--muted); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
   nav a:hover, nav a[aria-current="page"] { color: var(--text); }
   nav a[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 8px; }
+  .right { display: flex; align-items: center; gap: 20px; }
   .desktop { display: flex; gap: 24px; }
+  .theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; padding: 0; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--muted); cursor: pointer; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent); }
+  .theme-toggle .moon { display: block; }
+  .theme-toggle .sun { display: none; }
+  :global(:root[data-theme="dark"]) .theme-toggle .moon { display: none; }
+  :global(:root[data-theme="dark"]) .theme-toggle .sun { display: block; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .theme-toggle .moon { display: none; }
+    :global(:root:not([data-theme="light"])) .theme-toggle .sun { display: block; }
+  }
   .mobile { display: none; position: relative; }
   .mobile summary { list-style: none; cursor: pointer; font-size: 0.93rem; font-weight: 500; padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; }
   .mobile summary::-webkit-details-marker { display: none; }
@@ -102,6 +135,7 @@ const nav = [
   @media (max-width: 640px) {
     .desktop { display: none; }
     .mobile { display: block; }
+    .right { gap: 10px; }
   }
   main { padding-bottom: 3rem; min-height: 70vh; }
   .site-footer { border-top: 1px solid var(--border); padding: 1.75rem 0 2.5rem; }

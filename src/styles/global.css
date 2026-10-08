@@ -22,7 +22,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #121418;
     --surface: #1a1d22;
     --text: #e7e8eb;
@@ -38,6 +38,23 @@
     --contour: #8db4ec;
     color-scheme: dark;
   }
+}
+
+:root[data-theme="dark"] {
+  --bg: #121418;
+  --surface: #1a1d22;
+  --text: #e7e8eb;
+  --muted: #a3a8b2;
+  --faint: #7c818b;
+  --border: #2b2f36;
+  --accent: #8db4ec;
+  --accent-soft: #1d2a3d;
+  --badge-review-bg: #3a2f17;
+  --badge-review-fg: #f1cf8a;
+  --badge-thesis-bg: #1c3226;
+  --badge-thesis-fg: #a6d8b7;
+  --contour: #8db4ec;
+  color-scheme: dark;
 }
 
 *,
