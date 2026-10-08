@@ -60,7 +60,8 @@ const links = [
         <span class="small muted"> (* equal contribution)</span>
       </p>
       <p class="abstract-label eyebrow">Abstract</p>
-      <p class="abstract">{compass.abstract}</p>
+      <p class="abstract" id="compass-abstract">{compass.abstract}</p>
+      <button class="toggle" type="button" aria-expanded="false" aria-controls="compass-abstract" hidden>Read full abstract</button>
       <p class="more small"><a href="/research">More on this line of research →</a></p>
     </article>
 
@@ -80,6 +81,21 @@ const links = [
   </div>
 </Base>
 
+<script>
+  // Collapse the abstract to five lines with a toggle. Without JavaScript the full abstract shows.
+  const abstract = document.getElementById("compass-abstract");
+  const toggle = document.querySelector<HTMLButtonElement>(".toggle");
+  if (abstract && toggle) {
+    abstract.classList.add("clamped");
+    toggle.hidden = false;
+    toggle.addEventListener("click", () => {
+      const open = abstract.classList.toggle("clamped") === false;
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.textContent = open ? "Show less" : "Read full abstract";
+    });
+  }
+</script>
+
 <style>
   .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
   .hero-inner { position: relative; display: flex; align-items: center; gap: 32px; padding-top: 3rem; padding-bottom: 2.5rem; }
@@ -94,7 +110,10 @@ const links = [
   .featured .authors sup { font-size: 0.7em; }
   .featured p:last-child { margin-bottom: 0; }
   .featured .abstract-label { color: var(--faint); margin: 0 0 0.2rem; }
-  .abstract { font-size: 0.95rem; line-height: 1.6; }
+  .abstract { font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.4rem; }
+  .abstract.clamped { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5; overflow: hidden; }
+  .toggle { background: none; border: 0; padding: 0; margin: 0 0 1rem; font: inherit; font-size: 0.9rem; font-weight: 500; color: var(--accent); cursor: pointer; }
+  .toggle:hover { text-decoration: underline; text-underline-offset: 3px; }
   .news { list-style: none; padding: 0; margin: 0; }
   .news li { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 0.45rem 0; border-bottom: 1px solid var(--border); }
   .news li:last-child { border-bottom: 0; }

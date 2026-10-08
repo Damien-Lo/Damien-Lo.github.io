@@ -29,8 +29,10 @@ import Base from "../layouts/Base.astro";
         model it reaches 0.64 on endoscopy images, where the strongest baseline sits at chance.
       </p>
       <figure>
+        <a href="/compass-fig1.png" title="Open full size">
         <img src="/compass-fig1.png" width="1340" height="545" loading="lazy"
-          alt="Two plots from the COMPASS paper. Left: mean KL divergence against normalized Gaussian noise for members and non-members of LLaVA v1.5-7B, across three noise regimes. Right: the member minus non-member divergence gap, with and without Rényi normalization, dipping most sharply in the middle regime." />
+            alt="Two plots from the COMPASS paper. Left: mean KL divergence against normalized Gaussian noise for members and non-members of LLaVA v1.5-7B, across three noise regimes. Right: the member minus non-member divergence gap, with and without Rényi normalization, dipping most sharply in the middle regime." />
+        </a>
         <figcaption class="small muted">
           Perturbation sensitivity of LLaVA v1.5–7B on Flickr pre-training data across normalized Gaussian noise.
           <strong>Left:</strong> mean KL divergence for members and non-members (bands show one standard deviation).
@@ -38,9 +40,11 @@ import Base from "../layouts/Base.astro";
           negative in the low-noise Regime II. From the COMPASS paper (Figure 1).
         </figcaption>
       </figure>
-      <figure class="wide">
+      <figure>
+        <a href="/compass-fig2.png" title="Open full size">
         <img src="/compass-fig2.png" width="1650" height="652" loading="lazy"
-          alt="Diagram of the COMPASS attack: a noise-level calibration phase using an unlabeled target set and a known non-member reference set, a shared perturbation scoring operator (perturb, query the VLLM, token-wise divergence, max-k mean), and a per-sample membership decision." />
+            alt="Diagram of the COMPASS attack: a noise-level calibration phase using an unlabeled target set and a known non-member reference set, a shared perturbation scoring operator (perturb, query the VLLM, token-wise divergence, max-k mean), and a per-sample membership decision." />
+        </a>
         <figcaption class="small muted">
           The COMPASS attack. A tuning phase compares how the target set and a known non-member reference set respond
           across noise levels to pick the perturbation magnitude and score direction; a scoring phase then perturbs each
@@ -91,8 +95,6 @@ import Base from "../layouts/Base.astro";
   figure { margin: 1.5rem 0 0; }
   figure img { width: 100%; height: auto; display: block; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
   figcaption { margin-top: 0.6rem; }
-  .wide { width: min(1040px, calc(100vw - 32px)); position: relative; left: 50%; transform: translateX(-50%); }
-  .wide figcaption { max-width: 720px; margin-left: auto; margin-right: auto; }
   .emerging { border-left: 3px solid var(--accent-soft); padding-left: 18px; }
   .emerging h2 { font-size: 1.35rem; }
 </style>
