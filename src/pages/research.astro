@@ -6,13 +6,14 @@ import Base from "../layouts/Base.astro";
   <div class="wrap">
     <h1 class="page-title">Research</h1>
     <p class="lede">
-      My research asks what a model's observable behavior reveals about what it has learned and memorized. I started
-      with a practical privacy question about vision-language models, and it has led me toward a broader, more scientific
-      one.
+      I want to capture the complex behavior that emerges inside large models, and to build the probes and frameworks
+      that turn that understanding into more explainable, useful and secure systems. My work so far approaches this
+      through privacy: membership inference reveals what a model has memorized about its training data, and each project
+      below moves a step further from measuring that behavior toward explaining and predicting it.
     </p>
 
     <section>
-      <p class="eyebrow">Current</p>
+      <p class="eyebrow">Honors thesis · Paper under review</p>
       <h2>Privacy in vision-language models</h2>
       <p>
         Vision large language models are increasingly trained on sensitive images, including medical scans. Membership
@@ -60,26 +61,37 @@ import Base from "../layouts/Base.astro";
 
     <section>
       <p class="eyebrow">In progress</p>
-      <h2>Scaling laws for membership inference</h2>
+      <h2>A landscape framework for memorization</h2>
       <p>
-        I am exploring empirical scaling laws for membership inference attacks. The goal is to predict how well a
-        well-resourced attacker would do from low-cost audits a defender can actually run, which would make privacy risk
-        measurable for models too large to audit directly.
+        COMPASS treats a model's response to noise as a signal. This project asks what that signal is a measurement
+        of. My thesis began to describe memorized samples as sitting in unusually stable regions of a model's response
+        landscape, regions that resist small perturbations. I am now working to make that picture precise, using the
+        dynamics of how outputs change under perturbation, together with tools from information geometry, to map the
+        landscape around training and unseen data.
+      </p>
+      <p>
+        The goal is a mechanistic account of membership inference: why the signal appears at low noise, why its
+        direction flips between models, and whether memorization leaves measurable geometric signatures in a model's
+        representations. An explanation of that kind would turn privacy attacks from empirical tools into instruments
+        for studying how large models store what they learn. My background in physics, including two years of
+        experimental condensed-matter research, shapes how I approach these questions.
       </p>
     </section>
 
-    <section class="emerging">
-      <p class="eyebrow">Emerging direction</p>
-      <h2>Perturbation landscapes and model geometry</h2>
+    <section>
+      <p class="eyebrow">In progress</p>
+      <h2>Scaling laws for membership inference</h2>
       <p>
-        My thesis began to describe memorized samples as sitting in unusually stable regions of a model's response
-        landscape, regions that resist small perturbations. I want to make that picture precise. Which geometric or
-        dynamical properties of learned representations produce this stability? How does it relate to generalization?
-        Can tools from high-dimensional geometry, dynamical systems and statistical physics explain it?
+        Privacy audits are expensive, and the models that most need them are often too large to audit directly. In
+        physics, scaling laws let us predict a system's behavior far beyond the regime we can measure, and in machine
+        learning they already predict how loss falls with model size, data and compute. This project asks whether
+        privacy risk follows similar laws.
       </p>
       <p>
-        My background in physics and engineering, including two years of experimental condensed-matter research, shapes
-        how I approach these questions.
+        I am exploring empirical scaling laws for membership inference attacks: how attack success changes with the
+        resources available to an attacker and with the scale of the model and its training data. If those trends are
+        predictable, a defender could run small, low-cost audits and extrapolate to estimate what a well-resourced
+        attacker could achieve, making privacy risk measurable for models too large to test directly.
       </p>
     </section>
   </div>
@@ -95,6 +107,4 @@ import Base from "../layouts/Base.astro";
   figure { margin: 1.5rem 0 0; }
   figure img { width: 100%; height: auto; display: block; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
   figcaption { margin-top: 0.6rem; }
-  .emerging { border-left: 3px solid var(--accent-soft); padding-left: 18px; }
-  .emerging h2 { font-size: 1.35rem; }
 </style>
