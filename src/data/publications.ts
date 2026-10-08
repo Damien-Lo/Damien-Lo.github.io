@@ -26,7 +26,8 @@ export const publications: Publication[] = [
       "COMPASS: Membership Inference Attack Against Vision Large Language Models via Adaptive Noise Calibration",
     authors: ["Damien Lo", "Hong Kyu Lee", "Ruixuan Liu", "Li Xiong"],
     equal: ["Damien Lo", "Hong Kyu Lee"],
-    venue: "ICLR 2027",
+    // Venue hidden while under review; set it once the paper is accepted.
+    venue: "",
     status: "under-review",
     year: 2026,
     summary:

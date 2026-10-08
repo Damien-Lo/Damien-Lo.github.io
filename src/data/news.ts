@@ -1,5 +1,5 @@
 export const news = [
-  { date: "Sep 2026", text: "COMPASS submitted to ICLR 2027." },
+  { date: "Sep 2026", text: "Submitted COMPASS, our membership inference attack on vision large language models, for peer review." },
   {
     date: "May 2026",
     text: "Graduated from Emory with a B.S., Highest Honors in Computer Science & Economics.",

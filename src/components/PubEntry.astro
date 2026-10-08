@@ -31,7 +31,7 @@ const hasEqual = (pub.equal?.length ?? 0) > 1;
   </p>
   <p class="venue">
     <span class={`badge ${pub.status}`}>{statusLabel[pub.status]}</span>
-    <span class="muted">{pub.venue}{pub.status === "thesis" ? `, ${pub.year}` : ""}</span>
+    {pub.venue && <span class="muted">{pub.venue}{pub.status === "thesis" ? `, ${pub.year}` : ""}</span>}
   </p>
   {showSummary && <p class="summary">{pub.summary}</p>}
   {(pub.note || hasEqual) && (
