@@ -1,0 +1,110 @@
+---
+import Base from "../layouts/Base.astro";
+import Contours from "../components/Contours.astro";
+import { profile } from "../data/profile";
+import { publications, ME } from "../data/publications";
+import { news } from "../data/news";
+
+const compass = publications.find((p) => p.id === "compass")!;
+const links = [
+  { label: "Email", href: `mailto:${profile.email}` },
+  { label: "CV", href: profile.links.cv },
+  { label: "GitHub", href: profile.links.github },
+  { label: "LinkedIn", href: profile.links.linkedin },
+  { label: "Google Scholar", href: profile.links.scholar },
+].filter((l) => l.href);
+---
+
+<Base>
+  <section class="hero">
+    <Contours />
+    <div class="wrap hero-inner">
+      <img
+        class="headshot"
+        src="/headshot.jpg"
+        width="320"
+        height="380"
+        alt="Portrait of Damien Lo"
+        fetchpriority="high"
+      />
+      <div>
+        <h1>{profile.name}</h1>
+        <p class="role">{profile.role}<br /><span class="muted">{profile.affiliation}</span></p>
+        <ul class="links">
+          {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    {profile.intro.map((p) => <p class="intro">{p}</p>)}
+    <ul class="chips" aria-label="Research interests">
+      {profile.interests.map((i) => <li>{i}</li>)}
+    </ul>
+
+    <h2>Featured paper</h2>
+    <article class="card featured">
+      <p class="eyebrow">Under review at {compass.venue}</p>
+      <h3>{compass.title}</h3>
+      <p class="authors">
+        {
+          compass.authors.map((a, i) => (
+            <>
+              {a === ME ? <strong>{a}</strong> : a}
+              {compass.equal?.includes(a) && <sup>*</sup>}
+              {i < compass.authors.length - 1 ? ", " : ""}
+            </>
+          ))
+        }
+        <span class="small muted"> (* equal contribution)</span>
+      </p>
+      <p>
+        Membership inference asks whether a given image was in a model's training data. We sweep Gaussian image noise at
+        fine resolution and find that the strongest signal often sits in a previously unstudied low-noise regime, where
+        training images change <em>less</em> than unseen ones. COMPASS calibrates both the noise level and the direction
+        of the signal without any labeled training examples. It reaches AUC up to 0.88 across LLaVA and MiniGPT-4, and
+        stays informative on medical images where existing attacks fall to chance.
+      </p>
+      <p class="more small"><a href="/research">More on this line of research →</a></p>
+    </article>
+
+    <h2>News</h2>
+    <ul class="news">
+      {
+        news.map((n) => (
+          <li>
+            <span class="date">{n.date}</span>
+            <span>
+              {n.href ? <a href={n.href} set:html={n.text} /> : <Fragment set:html={n.text} />}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+  .hero-inner { position: relative; display: flex; align-items: center; gap: 32px; padding-top: 3rem; padding-bottom: 2.5rem; }
+  .headshot { width: 160px; height: 190px; object-fit: cover; object-position: 50% 22%; border-radius: 12px; border: 1px solid var(--border); flex-shrink: 0; background: var(--surface); }
+  .role { margin: 0.35rem 0 0.9rem; font-size: 1.02rem; line-height: 1.5; }
+  .links { display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 0; margin: 0; list-style: none; font-size: 0.95rem; font-weight: 500; }
+  .intro { font-size: 1.06rem; }
+  .chips { margin-top: 1.25rem; }
+  .featured h3 { margin: 0.35rem 0 0.5rem; font-size: 1.2rem; }
+  .featured .eyebrow { margin: 0; color: var(--badge-review-fg); }
+  .featured .authors { font-size: 0.95rem; margin-bottom: 0.8rem; }
+  .featured .authors sup { font-size: 0.7em; }
+  .featured p:last-child { margin-bottom: 0; }
+  .news { list-style: none; padding: 0; margin: 0; }
+  .news li { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 0.45rem 0; border-bottom: 1px solid var(--border); }
+  .news li:last-child { border-bottom: 0; }
+  .date { color: var(--faint); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 2px; }
+  @media (max-width: 600px) {
+    .hero-inner { flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 2rem; }
+    .headshot { width: 120px; height: 142px; }
+    .news li { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>

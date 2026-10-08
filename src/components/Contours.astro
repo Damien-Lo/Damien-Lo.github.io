@@ -1,0 +1,38 @@
+---
+// Decorative contour lines: a faint "landscape" motif behind the Home header.
+const rings = Array.from({ length: 9 }, (_, i) => i);
+---
+
+<svg class="contours" viewBox="0 0 600 360" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
+  <g fill="none" stroke="currentColor" stroke-width="1">
+    {
+      rings.map((i) => {
+        const s = 1 + i * 0.32;
+        return (
+          <path
+            transform={`translate(430 170) scale(${s}) rotate(${i * 4})`}
+            d="M -60 -6 C -58 -40 -18 -52 14 -44 C 48 -36 66 -12 60 14 C 54 42 22 52 -8 48 C -40 44 -62 26 -60 -6 Z"
+            opacity={0.55 - i * 0.045}
+          />
+        );
+      })
+    }
+    {
+      rings.slice(0, 5).map((i) => {
+        const s = 1 + i * 0.4;
+        return (
+          <path
+            transform={`translate(140 300) scale(${s}) rotate(${-i * 6})`}
+            d="M -40 0 C -40 -26 -10 -34 14 -28 C 36 -22 44 -4 38 14 C 32 32 8 36 -12 32 C -32 28 -40 18 -40 0 Z"
+            opacity={0.35 - i * 0.05}
+          />
+        );
+      })
+    }
+  </g>
+</svg>
+
+<style>
+  .contours { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--contour); opacity: 0.22; pointer-events: none; }
+  @media (prefers-color-scheme: dark) { .contours { opacity: 0.16; } }
+</style>

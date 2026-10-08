@@ -1,0 +1,46 @@
+---
+import Base from "../layouts/Base.astro";
+import { timeline } from "../data/timeline";
+---
+
+<Base title="About" description="About Damien Lo.">
+  <div class="wrap">
+    <h1 class="page-title">About</h1>
+    <p>
+      I am a research assistant in Li Xiong's AIMS Lab at Emory University, where I work on privacy and memorization in
+      vision-language models. I graduated from Emory in 2026 with a B.S., majoring in Physics (Engineering Science
+      Concentration) and in the Computer Science &amp; Economics Joint Program, the latter with Highest Honors.
+    </p>
+    <p>
+      I came to machine learning from physics. As an undergraduate I spent two years in a condensed-matter lab, building
+      a magneto-optic Kerr effect setup to study weakly anisotropic magnetic systems. That experience shaped how I
+      approach neural networks: as physical systems whose behavior can be measured, perturbed and explained, not only
+      benchmarked. My honors thesis applied that view to the question of how vision-language models memorize their
+      training data, and led to COMPASS.
+    </p>
+    <p>I grew up in Hong Kong and speak English, Mandarin and Cantonese.</p>
+
+    <h2>Timeline</h2>
+    <ol class="timeline">
+      {
+        timeline.map((t) => (
+          <li>
+            <span class="when">{t.when}</span>
+            <span>{t.what}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</Base>
+
+<style>
+  .page-title { margin-top: 2.5rem; }
+  .timeline { list-style: none; padding: 0; margin: 0; }
+  .timeline li { display: grid; grid-template-columns: 130px 1fr; gap: 14px; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+  .timeline li:last-child { border-bottom: 0; }
+  .when { color: var(--faint); font-size: 0.92rem; font-variant-numeric: tabular-nums; padding-top: 2px; }
+  @media (max-width: 600px) {
+    .timeline li { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+import Base from "../layouts/Base.astro";
+import ConceptFigure from "../components/ConceptFigure.astro";
+---
+
+<Base title="Research" description="Damien Lo's research on privacy and memorization in vision large language models.">
+  <div class="wrap">
+    <h1 class="page-title">Research</h1>
+    <p class="lede">
+      My research asks what a model's observable behavior reveals about what it has learned and memorized. I started
+      with a practical privacy question about vision-language models, and it has led me toward a broader, more scientific
+      one.
+    </p>
+
+    <section>
+      <p class="eyebrow">Current</p>
+      <h2>Privacy in vision-language models</h2>
+      <p>
+        Vision large language models are increasingly trained on sensitive images, including medical scans. Membership
+        inference attacks test whether a specific image was in a model's training data, which makes them a tool for
+        privacy auditing.
+      </p>
+      <p>
+        In my honors thesis and in COMPASS, I studied how VLLM outputs shift as an input image is perturbed with Gaussian
+        noise, swept finely from near zero to large. Two findings stood out. First, the clearest membership signal often
+        appears at very low noise, a regime earlier perturbation attacks skipped. Second, the direction of the signal
+        flips between settings: in some models training images respond <em>less</em> to noise than unseen images, in
+        others <em>more</em>. COMPASS turns this into an attack that calibrates both the noise level and the direction
+        from unlabeled data. It reaches AUC up to 0.88 on LLaVA v1.5-7B and 0.81 on MiniGPT-4. On the HuluMed-32B medical
+        model it reaches 0.64 on endoscopy images, where the strongest baseline sits at chance.
+      </p>
+      <ConceptFigure />
+      <p class="small muted aside">
+        COMPASS grew out of the method developed in my <a href="/publications">honors thesis</a>, which also evaluated MRI
+        and microscopy data. The paper is under review at ICLR 2027.
+      </p>
+    </section>
+
+    <section>
+      <p class="eyebrow">In progress</p>
+      <h2>Scaling laws for membership inference</h2>
+      <p>
+        I am exploring empirical scaling laws for membership inference attacks. The goal is to predict how well a
+        well-resourced attacker would do from low-cost audits a defender can actually run, which would make privacy risk
+        measurable for models too large to audit directly.
+      </p>
+    </section>
+
+    <section class="emerging">
+      <p class="eyebrow">Emerging direction</p>
+      <h2>Perturbation landscapes and model geometry</h2>
+      <p>
+        My thesis began to describe memorized samples as sitting in unusually stable regions of a model's response
+        landscape, regions that resist small perturbations. I want to make that picture precise. Which geometric or
+        dynamical properties of learned representations produce this stability? How does it relate to generalization?
+        Can tools from high-dimensional geometry, dynamical systems and statistical physics explain it?
+      </p>
+      <p>
+        My background in physics and engineering, including two years of experimental condensed-matter research, shapes
+        how I approach these questions.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .page-title { margin-top: 2.5rem; }
+  .lede { font-size: 1.08rem; color: var(--muted); }
+  section { margin-top: 2.5rem; }
+  section .eyebrow { margin: 0; }
+  section h2 { margin-top: 0.2rem; }
+  .aside { margin-top: 1rem; }
+  .emerging { border-left: 3px solid var(--accent-soft); padding-left: 18px; }
+  .emerging h2 { font-size: 1.35rem; }
+</style>
