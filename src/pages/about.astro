@@ -1,0 +1,71 @@
+---
+import Base from "../layouts/Base.astro";
+import { timeline } from "../data/timeline";
+import { profile } from "../data/profile";
+---
+
+<Base title="About" description="About Damien Lo.">
+  <div class="wrap">
+    <h1 class="page-title">About</h1>
+    <div class="intro">
+      <figure class="photo">
+        <img src="/about-photo.jpg" alt="Damien Lo, smiling" width="800" height="1000" loading="eager" />
+      </figure>
+        <p>
+          Hi, I'm Damien, and thank you for visiting my site! I am originally from Hong Kong, and I now work as a research assistant
+          with <a href="https://www.cs.emory.edu/~lxiong/">Professor Li Xiong</a> in the
+          <a href="https://www.cs.emory.edu/site/aims/">AIMS Lab</a> at Emory University. I graduated from Emory in 2026
+          with a B.S., majoring in Physics (Engineering Science Concentration) and in the Computer Science &amp; Economics
+          Joint Program.
+        </p>
+        <p>
+          My main motivation for all my work has always been simply figuring out how things work. That started with
+          physics, and has since evolved into applying the very same concepts and reasoning to exploring the complexity of
+          our modern machine learning models. I have always found value in truly understanding how systems work, and I
+          find that such knowledge unlocks previously hidden pathways to new ideas and further advancement. That is what I
+          think research is fundamentally about.
+        </p>
+        <p>
+          I am always happy to connect and talk through ideas, research or shared interests, so please feel free to
+          <a href={`mailto:${profile.email}`}>reach out</a>.
+        </p>
+    </div>
+
+    <h2>Outside the lab</h2>
+    <p>
+      Away from research, I love making things with my hands. I build model aircraft, I am often designing parts in CAD
+      and 3D printing them, and I unwind by cooking. I've also been an avid football (soccer) and badminton player since
+      I was a kid, and I recently picked up some boxing.
+    </p>
+
+    <h2>Timeline</h2>
+    <ol class="timeline">
+      {
+        timeline.map((t) => (
+          <li>
+            <span class="when">{t.when}</span>
+            <span>{t.what}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</Base>
+
+<style>
+  .page-title { margin-top: 2.5rem; }
+  .intro { display: flow-root; }
+  .intro p:first-of-type { margin-top: 0; }
+  .photo { float: right; width: 210px; margin: 0.35rem 0 1rem 28px; }
+  .photo img { width: 100%; height: auto; border-radius: 10px; display: block; }
+  @media (max-width: 680px) {
+    .photo { float: none; width: 220px; margin: 0 0 1.2rem; }
+  }
+  .timeline { list-style: none; padding: 0; margin: 0; }
+  .timeline li { display: grid; grid-template-columns: 130px 1fr; gap: 14px; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+  .timeline li:last-child { border-bottom: 0; }
+  .when { color: var(--faint); font-size: 0.92rem; font-variant-numeric: tabular-nums; padding-top: 2px; }
+  @media (max-width: 600px) {
+    .timeline li { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>

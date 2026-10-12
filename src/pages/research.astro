@@ -1,0 +1,106 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Research" description="Damien Lo's research on privacy and memorization in vision large language models.">
+  <div class="wrap">
+    <h1 class="page-title">Research</h1>
+    <p class="lede">
+      I currently explore the dynamics and memory of large models through membership inference attacks, which test whether a
+      specific example was part of a model's training data. A successful attack reveals what a model has memorized, so
+      these attacks double as probes of how models store information. My recent work spans an attack on vision large language
+      models, a geometric framework for the signal behind it, and scaling laws for predicting privacy risk at scale.
+    </p>
+
+    <section>
+      <p class="eyebrow">Honors thesis · Paper under review</p>
+      <h2>Privacy in vision-language models</h2>
+      <p>
+        Vision large language models are increasingly trained on sensitive images, including medical scans. Membership
+        inference attacks test whether a specific image was in a model's training data, which makes them a tool for
+        privacy auditing.
+      </p>
+      <p>
+        In my honors thesis and in COMPASS, I studied how VLLM outputs shift as an input image is perturbed with Gaussian
+        noise, swept finely from near zero to large. Two findings stood out. First, the clearest membership signal often
+        appears at very low noise, a regime earlier perturbation attacks skipped. Second, the direction of the signal
+        flips between settings: in some models training images respond <em>less</em> to noise than unseen images, in
+        others <em>more</em>. COMPASS turns this into an attack that calibrates both the noise level and the direction
+        from unlabeled data. It reaches AUC up to 0.88 on LLaVA v1.5-7B and 0.81 on MiniGPT-4. On the HuluMed-32B medical
+        model it reaches 0.64 on endoscopy images, where the strongest baseline sits at chance.
+      </p>
+      <figure>
+        <a href="/compass-fig1.png" title="Open full size">
+        <img src="/compass-fig1.png" width="1340" height="545" loading="lazy"
+            alt="Two plots from the COMPASS paper. Left: mean KL divergence against normalized Gaussian noise for members and non-members of LLaVA v1.5-7B, across three noise regimes. Right: the member minus non-member divergence gap, with and without Rényi normalization, dipping most sharply in the middle regime." />
+        </a>
+        <figcaption class="small muted">
+          Perturbation sensitivity of LLaVA v1.5–7B on Flickr pre-training data across normalized Gaussian noise.
+          <strong>Left:</strong> mean KL divergence for members and non-members (bands show one standard deviation).
+          <strong>Right:</strong> the member–non-member gap, with and without Rényi normalization; the gap is most
+          negative in the low-noise Regime II. From the COMPASS paper (Figure 1).
+        </figcaption>
+      </figure>
+      <figure>
+        <a href="/compass-fig2.png" title="Open full size">
+        <img src="/compass-fig2.png" width="1650" height="652" loading="lazy"
+            alt="Diagram of the COMPASS attack: a noise-level calibration phase using an unlabeled target set and a known non-member reference set, a shared perturbation scoring operator (perturb, query the VLLM, token-wise divergence, max-k mean), and a per-sample membership decision." />
+        </a>
+        <figcaption class="small muted">
+          The COMPASS attack. A tuning phase compares how the target set and a known non-member reference set respond
+          across noise levels to pick the perturbation magnitude and score direction; a scoring phase then perturbs each
+          image, aggregates the largest token-wise divergences, and orients the result into a membership score. From the
+          COMPASS paper (Figure 2).
+        </figcaption>
+      </figure>
+      <p class="small muted aside">
+        COMPASS grew out of the method developed in my <a href="/publications">honors thesis</a>, which also evaluated MRI
+        and microscopy data. The paper is currently under review.
+      </p>
+    </section>
+
+    <section>
+      <p class="eyebrow">In progress</p>
+      <h2>A landscape framework for memorization</h2>
+      <p>
+        COMPASS treats a model's response to noise as a signal. This project asks what that signal is a measurement
+        of. My thesis began to describe memorized samples as sitting in unusually stable regions of a model's response
+        landscape, regions that resist small perturbations. I am now working to make that picture precise, using the dynamics of how outputs change under perturbation to map the landscape around training and unseen data.
+      </p>
+      <p>
+        The goal is a mechanistic account of membership inference: why the signal appears at low noise, why its
+        direction flips between models, and whether memorization leaves measurable geometric signatures in a model's representations. I aim to incorporate tools from information geometry and statistical physics to describe these state spaces, developing methods that may reveal previously underexplored relationships between memorization, utility and security. An explanation of that kind would turn privacy attacks from empirical tools into instruments
+        for studying how large models store what they learn.
+      </p>
+    </section>
+
+    <section>
+      <p class="eyebrow">In progress</p>
+      <h2>Scaling laws for membership inference</h2>
+      <p>
+        Privacy audits are expensive, and the models that most need them are often too large to audit directly. In
+        physics, scaling laws let us predict a system's behavior far beyond the regime we can measure, and in machine
+        learning they already predict how loss falls with model size, data and compute. This project asks whether
+        privacy risk follows similar laws.
+      </p>
+      <p>
+        I am exploring empirical scaling laws for membership inference attacks: how attack success changes with the
+        resources available to an attacker and with the scale of the model and its training data. If those trends are
+        predictable, a defender could run small, low-cost audits and extrapolate to estimate what a well-resourced
+        attacker could achieve, making privacy risk measurable for models too large to test directly.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .page-title { margin-top: 2.5rem; }
+  .lede { font-size: 1.08rem; color: var(--muted); }
+  section { margin-top: 2.5rem; }
+  section .eyebrow { margin: 0; }
+  section h2 { margin-top: 0.2rem; }
+  .aside { margin-top: 1rem; }
+  figure { margin: 1.5rem 0 0; }
+  figure img { width: 100%; height: auto; display: block; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
+  figcaption { margin-top: 0.6rem; }
+</style>

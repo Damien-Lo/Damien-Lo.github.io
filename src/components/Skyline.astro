@@ -1,0 +1,17 @@
+---
+// Decorative Hong Kong skyline across the Home header, tinted with the theme's contour colour.
+---
+
+<div class="skyline" aria-hidden="true"></div>
+
+<style>
+  .skyline {
+    position: absolute;
+    inset: 0;
+    background: var(--contour);
+    -webkit-mask: url("/hk-skyline.png") repeat-x center bottom / auto 100%;
+    mask: url("/hk-skyline.png") repeat-x center bottom / auto 100%;
+    opacity: 0.09;
+    pointer-events: none;
+  }
+</style>
