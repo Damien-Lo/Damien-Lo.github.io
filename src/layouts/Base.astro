@@ -101,6 +101,16 @@ const nav = [
         root.dataset.theme = next;
         try { localStorage.setItem("theme", next); } catch (e) {}
       });
+      // Open external links and files (CV, figures) in a new tab; site pages stay in this tab.
+      document.querySelectorAll("a[href]").forEach((a) => {
+        const url = new URL(a.href, location.href);
+        const external = /^https?:$/.test(url.protocol) && url.host !== location.host;
+        const file = /\.(pdf|png|jpe?g)$/i.test(url.pathname);
+        if (external || file) {
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+        }
+      });
     </script>
   </body>
 </html>
